@@ -3,7 +3,7 @@ var $ = function (id) {
 }
 
 function processInfo() {
-  // Define Variables
+  // Define my variables
   var firstName = $("firstname").value;
   var lastName = $("lastname").value;
   var numPets = $("numpets").value;
@@ -13,12 +13,14 @@ function processInfo() {
   var todayMonth = today.getMonth() + 1;
   var todayDay = today.getDate();
 
-  // Check for errors
-  var errorFlag = "N";
+  // Reset messages if submit button is clicked again
   $("firstname_error").innerHTML = "";
   $("lastname_error").innerHTML = "";
   $("numpets_error").innerHTML = "";
   $("message").innerHTML = "";
+
+  // Check for errors
+  var errorFlag = "N";
 
   if (firstName.length <= 0) {
     $("firstname_error").innerHTML = "Please enter first name";
@@ -36,17 +38,15 @@ function processInfo() {
   }
 
   if (errorFlag == "N") {
-
     // Process Name
     var fullName = lastName + ', ' + firstName;
     var msgText = "Your Name is listed as " + fullName + " and today's date is " + todayMonth + "-" + todayDay + "-" + todayYear + ".";
 
     // Process Pets
-    for (counter = 1; counter <= numPets; counter++) 
-    {
+    for (counter = 1; counter <= numPets; counter++) {
       var myPetId = 'pet' + counter;
       var petName = $(myPetId).value;
-      
+
       if (petName.length > 0) {
         msgText = msgText + " Your Pet #" + counter + " is named " + petName + ".";
       }
