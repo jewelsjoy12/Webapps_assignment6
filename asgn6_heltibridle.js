@@ -9,27 +9,44 @@ function processInfo() {
   var numPets = $("numpets").value;
 
   // Check for errors
-  var msg = "";
+  var errorFlag = "N";
+  $("firstname_error").innerHTML = "";
+  $("lastname_error").innerHTML = "";
+  $("numpets_error").innerHTML = "";
 
-  msg += "Please enter first name";
-  msg += "Please enter last name";
-  msg += "Please enter the number of pets you have";
 
-  // Process Name
-  var fullName = lastName + ', ' + firstName;
-  $("message").innerHTML = "Your name is listed as " + fullName + "and today's date is " + ".";
+  if (firstName.length <= 0) {
+    $("firstname_error").innerHTML = "Please enter first name";
+    errorFlag = "Y";
+  }
 
-  // Process Pets
-  for (counter = 1; counter <= numPets; counter++) {
+  if (lastName.length <= 0) {
+    $("lastname_error").innerHTML = "Please enter last name";
+    errorFlag = "Y";
+  }
 
-    var myPetId = 'pet' + counter;
+  if (numPets.length <= 0) {
+    $("numpets_error").innerHTML = "Please enter the number of pets you have";
+    errorFlag = "Y"
+  }
 
-    petName = $(myPetId).value;
+  if (errorFlag == "N") {
 
-    $("message").innerHTML += "Your Pet #" + counter + " is named " + petName + ".";
+    // Process Name
+    var fullName = lastName + ', ' + firstName;
+    $("message").innerHTML = "Your name is listed as " + fullName + " and today's date is " + ".";
+
+    // Process Pets
+    for (counter = 1; counter <= numPets; counter++) {
+
+      var myPetId = 'pet' + counter;
+
+      petName = $(myPetId).value;
+
+      $("message").innerHTML += "Your Pet #" + counter + " is named " + petName + ".";
+    }
   }
 }
-
 window.onload = function () {
   $("mybutton").onclick = processInfo;
 }
