@@ -8,12 +8,17 @@ function processInfo() {
   var lastName = $("lastname").value;
   var numPets = $("numpets").value;
 
+  var today = new Date();
+  var todayYear = today.getFullYear();
+  var todayMonth = today.getMonth() + 1;
+  var todayDay = today.getDate();
+
   // Check for errors
   var errorFlag = "N";
   $("firstname_error").innerHTML = "";
   $("lastname_error").innerHTML = "";
   $("numpets_error").innerHTML = "";
-
+  $("message").innerHTML = "";
 
   if (firstName.length <= 0) {
     $("firstname_error").innerHTML = "Please enter first name";
@@ -34,17 +39,21 @@ function processInfo() {
 
     // Process Name
     var fullName = lastName + ', ' + firstName;
-    $("message").innerHTML = "Your name is listed as " + fullName + " and today's date is " + ".";
+    var msgText = "Your Name is listed as " + fullName + " and today's date is " + todayMonth + "-" + todayDay + "-" + todayYear + ".";
 
     // Process Pets
-    for (counter = 1; counter <= numPets; counter++) {
-
+    for (counter = 1; counter <= numPets; counter++) 
+    {
       var myPetId = 'pet' + counter;
-
-      petName = $(myPetId).value;
-
-      $("message").innerHTML += "Your Pet #" + counter + " is named " + petName + ".";
+      var petName = $(myPetId).value;
+      
+      if (petName.length > 0) {
+        msgText = msgText + " Your Pet #" + counter + " is named " + petName + ".";
+      }
     }
+
+    var displayMessage = $("message");
+    displayMessage.innerHTML = msgText;
   }
 }
 window.onload = function () {
